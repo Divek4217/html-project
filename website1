@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Store</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      background: #a8d8ea; /* Pastel Blue */
+      color: #333;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    /* Filters Section */
+    .filters {
+      padding: 20px;
+      background: #fff;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .filters button {
+      margin: 5px;
+      padding: 10px 20px;
+      background: #ff9a8b; /* Pastel Coral */
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .filters button:hover {
+      background: #ff7f6e; /* Slightly darker coral */
+    }
+
+    /* Product Grid */
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      justify-content: center;
+    }
+
+    .product-card {
+      border: 1px solid #ddd;
+      padding: 15px;
+      width: calc(25% - 40px);
+      box-sizing: border-box;
+      text-align: center;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .product-card h3 {
+      margin: 15px 0 10px;
+      font-size: 1.25rem;
+      color: #333;
+    }
+
+    .product-card p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .product-card button {
+      background: #a8d8ea; /* Pastel Blue */
+      color: #333;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .product-card button:hover {
+      background: #8cc2d8; /* Slightly darker pastel blue */
+    }
+
+    /* Checkout Page */
+    .checkout-page {
+      padding: 40px 20px;
+      text-align: center;
+      background: #fff;
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .checkout-page h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .checkout-page p {
+      font-size: 1.1rem;
+      color: #666;
+    }
+
+    .checkout-page button {
+      background: #ff9a8b; /* Pastel Coral */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .checkout-page button:hover {
+      background: #ff7f6e; /* Slightly darker coral */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .product-card {
+        width: calc(50% - 40px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Online Store</h1>
+  </header>
+
+  <!-- Filters Section -->
+  <div class="filters">
+    <button onclick="filterProducts('all')">All</button>
+    <button onclick="filterProducts('category1')">Category 1</button>
+    <button onclick="filterProducts('category2')">Category 2</button>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-grid">
+    <div class="product-card" data-category="category1">
+      <img src="https://via.placeholder.com/150" alt="Product 1">
+      <h3>Product 1</h3>
+      <p>Description of Product 1.</p>
+      <p>$19.99</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product-card" data-category="category2">
+      <img src="https://via.placeholder.com/150" alt="Product 2">
+      <h3>Product 2</h3>
+      <p>Description of Product 2.</p>
+      <p>$29.99</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product-card" data-category="category1">
+      <img src="https://via.placeholder.com/150" alt="Product 3">
+      <h3>Product 3</h3>
+      <p>Description of Product 3.</p>
+      <p>$39.99</p>
+      <button>Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Checkout Page -->
+  <div class="checkout-page">
+    <h2>Checkout</h2>
+    <p>Your cart is empty.</p>
+    <button>Proceed to Payment</button>
+  </div>
+
+  <script>
+    // Simple filter functionality
+    function filterProducts(category) {
+      const products = document.querySelectorAll('.product-card');
+      products.forEach(product => {
+        if (category === 'all' || product.dataset.category === category) {
+          product.style.display = 'block';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
